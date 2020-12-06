@@ -1,6 +1,6 @@
 import unittest
 
-from day_4 import parse_passports, a, b
+from advent_2020.day_4 import parse_passports, a, b
 
 """
 We need to detect which passports have all the required fields
@@ -8,7 +8,7 @@ Passports separated by blank line
 """
 
 example = """
-ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+ecl:gry pid:860033327 eyr:advent_2020 hcl:#fffffd
 byr:1937 iyr:2017 cid:147 hgt:183cm
 
 iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
@@ -52,7 +52,7 @@ hcl:#602927 eyr:1967 hgt:170cm
 ecl:grn pid:012533040 byr:1946
 
 hcl:dab227 iyr:2012
-ecl:brn hgt:182cm pid:021572410 eyr:2020 byr:1992 cid:277
+ecl:brn hgt:182cm pid:021572410 eyr:advent_2020 byr:1992 cid:277
 
 hgt:59cm ecl:zzz
 eyr:2038 hcl:74454a iyr:2023"""

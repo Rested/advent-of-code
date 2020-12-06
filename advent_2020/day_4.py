@@ -127,7 +127,7 @@ def b(parsed_ports: List[Dict[str, str]]):
 
 
 if __name__ == "__main__":
-    with open("inputs/4") as f:
+    with open("advent_2020/inputs/4") as f:
         real_parsed_ports = parse_passports(f.read())
 
     print("a)", a(parsed_ports=real_parsed_ports))

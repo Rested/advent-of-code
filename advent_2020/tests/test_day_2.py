@@ -1,6 +1,6 @@
 import unittest
 
-from day_2 import PasswordEntry, parse_entry
+from advent_2020.day_2 import PasswordEntry, parse_entry
 
 
 class TestParsing(unittest.TestCase):

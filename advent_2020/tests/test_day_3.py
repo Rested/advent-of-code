@@ -6,7 +6,7 @@ Trees grow on exact integer coordinates on the grid.
 # -> Tree
 """
 
-from day_3 import parse_map, a, b
+from advent_2020.day_3 import parse_map, a, b
 
 
 class TestMapParse(unittest.TestCase):

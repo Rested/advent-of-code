@@ -53,7 +53,7 @@ def b(tree_map: TreeMap):
 
 
 if __name__ == '__main__':
-    with open("inputs/3") as f:
+    with open("advent_2020/inputs/3") as f:
         real_tree_map = parse_map(f.read())
 
     print("a)", a(real_tree_map))

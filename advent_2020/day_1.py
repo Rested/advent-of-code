@@ -3,7 +3,7 @@ STARS_REQUIRED_FOR_ROOM_DEPOSIT = 50
 
 
 def a(expenses):
-    # find two that add to 2020 and give their multiplication
+    # find two that add to advent_2020 and give their multiplication
     for x in expenses:
         for y in expenses:
             if x + y == 2020:
@@ -11,7 +11,7 @@ def a(expenses):
 
 
 def b(expenses):
-    # find three that add to 2020 and give their multiplication
+    # find three that add to advent_2020 and give their multiplication
     for x in expenses:
         for y in expenses:
             for z in expenses:
@@ -20,7 +20,7 @@ def b(expenses):
 
 
 if __name__ == '__main__':
-    with open("inputs/1") as f:
+    with open("advent_2020/inputs/1") as f:
         expenses = [int(v) for v in f.read().split("\n") if v]
     print("a)", a(expenses))
     print("b)", b(expenses))
