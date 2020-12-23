@@ -1,5 +1,4 @@
 from typing import Dict
-from urllib import request
 
 
 def parse_bag_rules(rule_text: str):
@@ -42,7 +41,10 @@ def bags_containing_bag_count(bag_rules: BagRules, bag_colour: str):
 def number_of_bags_inside_bag(bag_rules: BagRules, bag_color: str):
     if len(bag_rules[bag_color]) == 0:
         return 0
-    return sum((number_of_bags_inside_bag(bag_rules, inner_bag) * bag_rules[bag_color][inner_bag]) + bag_rules[bag_color][inner_bag] for inner_bag in bag_rules[bag_color])
+    return sum(
+        (number_of_bags_inside_bag(bag_rules, inner_bag) * bag_rules[bag_color][inner_bag]) + bag_rules[bag_color][
+            inner_bag] for inner_bag in bag_rules[bag_color])
+
 
 if __name__ == '__main__':
     with open("advent_2020/inputs/7") as f:
