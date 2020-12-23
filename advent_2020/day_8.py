@@ -16,7 +16,7 @@ def parse_instructions(instruction_text: str) -> Instructions:
     return instructions
 
 
-def execute_instructions_till_repeate_or_complete(instructions: Instructions) -> Tuple[bool, int, Instructions]:
+def execute_instructions_till_repeat_or_complete(instructions: Instructions) -> Tuple[bool, int, Instructions]:
     accumulator = 0
     executed_instruction_indices = []
     offset = 0
@@ -41,7 +41,7 @@ def execute_instructions_till_repeate_or_complete(instructions: Instructions) ->
 
 
 def find_finishing_jmp_nop(instructions: Instructions):
-    finishes, acc, _ = execute_instructions_till_repeate_or_complete(instructions)
+    finishes, acc, _ = execute_instructions_till_repeat_or_complete(instructions)
     if finishes:
         return acc
     for i, instruction in enumerate(instructions):
@@ -50,14 +50,14 @@ def find_finishing_jmp_nop(instructions: Instructions):
             modified_instruction_set[i]["operation"] = "nop"
         if instruction["operation"] == "nop":
             modified_instruction_set[i]["operation"] = "jmp"
-        finishes, acc, _ = execute_instructions_till_repeate_or_complete(modified_instruction_set)
+        finishes, acc, _ = execute_instructions_till_repeat_or_complete(modified_instruction_set)
         if finishes:
             return acc
 
 
 def a(instruction_text: str):
     instructions = parse_instructions(instruction_text)
-    _, acc, _ = execute_instructions_till_repeate_or_complete(instructions)
+    _, acc, _ = execute_instructions_till_repeat_or_complete(instructions)
     return acc
 
 

@@ -1,6 +1,6 @@
 import unittest
 
-from advent_2020.day_8 import parse_instructions, execute_instructions_till_repeate_or_complete, find_finishing_jmp_nop
+from advent_2020.day_8 import parse_instructions, execute_instructions_till_repeat_or_complete, find_finishing_jmp_nop
 
 
 class TestInstructionParse(unittest.TestCase):
@@ -25,7 +25,7 @@ acc +6"""
 class TestExecuteTillRepetition(unittest.TestCase):
     def test_example(self):
         instructions = parse_instructions(example)
-        finished, accumulator, _ = execute_instructions_till_repeate_or_complete(instructions)
+        finished, accumulator, _ = execute_instructions_till_repeat_or_complete(instructions)
         self.assertFalse(finished)
         self.assertEqual(accumulator, 5)
 
