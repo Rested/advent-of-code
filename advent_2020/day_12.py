@@ -24,7 +24,10 @@ def manhattan_distance(position):
     return abs(position[0]) + abs(position[1])
 
 
-def follow_directions(actions: List[Tuple[str, int]]):
+Actions = List[Tuple[str, int]]
+
+
+def follow_directions(actions: Actions):
     bearings = [NORTH, EAST, SOUTH, WEST]
     current_bearing = EAST
     current_bearing_index = 1
@@ -53,6 +56,41 @@ def follow_directions(actions: List[Tuple[str, int]]):
             position[0] -= amount
             continue
     return position
+
+
+def follow_directions_waypoint(actions: Actions):
+    bearings = [NORTH, EAST, SOUTH, WEST]
+    current_bearing = EAST
+    current_bearing_index = 1
+    way_point_position = [10, 1]
+    ship_position = [0, 0]
+    for action, amount in actions:
+        if action == LEFT:
+            # rotate way point around ship 90
+
+            current_bearing_index = (current_bearing_index - int(amount / 90)) % 4
+            current_bearing = bearings[current_bearing_index]
+
+            continue
+        if action == RIGHT:
+            current_bearing_index = (current_bearing_index + int(amount / 90)) % 4
+            current_bearing = bearings[current_bearing_index]
+            continue
+        if action == FORWARD:
+            action = current_bearing
+        if action == NORTH:
+            ship_position[1] += amount
+            continue
+        if action == EAST:
+            ship_position[0] += amount
+            continue
+        if action == SOUTH:
+            ship_position[1] -= amount
+            continue
+        if action == WEST:
+            ship_position[0] -= amount
+            continue
+    return ship_position
 
 
 if __name__ == "__main__":
