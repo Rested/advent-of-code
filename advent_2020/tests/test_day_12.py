@@ -8,6 +8,16 @@ F7
 R90
 F11"""
 
+# extended
+
+example_extended = """F10
+N3
+F7
+R90
+F11
+L90
+"""
+
 
 class TestExampleDirections(unittest.TestCase):
     def test_gives_correct_position(self):
@@ -22,7 +32,8 @@ class TestExampleDirectionsWaypoint(unittest.TestCase):
         self.assertEqual(follow_directions_waypoint(parse_input(example)), [214, -72])
 
     def test_gives_correct_manhattan_distance(self):
-        self.assertEqual(follow_directions_waypoint(follow_directions(parse_input(example))), 286)
+        self.assertEqual(manhattan_distance(follow_directions_waypoint(parse_input(example))), 286)
+
 
 
 if __name__ == '__main__':
