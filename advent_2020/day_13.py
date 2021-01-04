@@ -9,7 +9,8 @@ def parse_bus_times(input_text: str) -> Tuple[int, BusIds]:
 
 
 def get_wait_time_for_bus_id(earliest_depart_timestamp, bus_id):
-    return bus_id - (earliest_depart_timestamp % bus_id)
+    rem = earliest_depart_timestamp % bus_id
+    return bus_id - rem if rem != 0 else 0
 
 
 def get_earliest_bus(earliest_depart_timestamp: int, bus_ids: BusIds) -> Tuple[int, int]:
@@ -29,6 +30,21 @@ def get_earliest_bus(earliest_depart_timestamp: int, bus_ids: BusIds) -> Tuple[i
     return best_bus_id, best_wait_time
 
 
+def get_earliest_timestamp_for_sequential_departures(bus_ids: BusIds) -> int:
+    timestamp = 0
+    max_ts = 100_000_000
+    while True:
+        for i, bus_id in enumerate(bus_ids):
+            if bus_id is not None and get_wait_time_for_bus_id(timestamp, bus_id) != i:
+                break
+        else:
+            return timestamp
+        if timestamp % 10_000:
+            print(timestamp, i)
+        if timestamp > max_ts:
+            break
+        timestamp += bus_ids[0]  # a bit cheeky because could be x but it isnt so it is what it is
+
 def a(input_text: str):
     earliest_depart_timestamp, bus_ids = parse_bus_times(input_text)
     best_bus_id, best_wait_time = get_earliest_bus(earliest_depart_timestamp, bus_ids)
@@ -40,3 +56,4 @@ if __name__ == "__main__":
         inputs = f.read()
 
     print("a)", a(inputs))
+    print("b)", get_earliest_timestamp_for_sequential_departures(parse_bus_times(inputs)[1]))
