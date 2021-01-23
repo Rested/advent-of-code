@@ -7,6 +7,9 @@ example = """939
 """
 
 further_examples = (
+    # this first one is an important test case to ensure we handle for cases where the index of a bus id is > than the
+    # bus_id itself
+    ([1, None, 4, 3, 2], 6),
     ([17, None, 13, 19], 3417),
     ([67, 7, 59, 61], 754018),
     ([67, None, 7, 59, 61], 779210),
