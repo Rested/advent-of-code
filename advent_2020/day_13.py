@@ -32,18 +32,42 @@ def get_earliest_bus(earliest_depart_timestamp: int, bus_ids: BusIds) -> Tuple[i
 
 def get_earliest_timestamp_for_sequential_departures(bus_ids: BusIds) -> int:
     timestamp = 0
-    max_ts = 100_000_000
+    max_ts = 10_000_000_000_000
+    max_depth = 0
+    bus_id_encounters_tracker = {
+        bid: {"count": 0, "first_encounter_ts": None, "encounter_period": None} for bid in bus_ids
+    }
+    increment = bus_ids[0]
+    bus_id_indxs = [(i, bid) for i, bid in enumerate(bus_ids) if bid is not None]
+    x = 1
+    offset = 0
+    next_bid_indx = bus_id_indxs[0]
     while True:
-        for i, bus_id in enumerate(bus_ids):
-            if bus_id is not None and get_wait_time_for_bus_id(timestamp, bus_id) != i:
+        for i, bus_id in bus_id_indxs:
+            if get_wait_time_for_bus_id(timestamp, bus_id) != i:
                 break
+            bus_id_encounters_tracker[bus_id]["count"] += 1
+            if bus_id_encounters_tracker[bus_id]["first_encounter_ts"] is None:
+                bus_id_encounters_tracker[bus_id]["first_encounter_ts"] = timestamp
+                print(f"first time encountered {bus_id} is at {timestamp}, offset {i} ({timestamp + i})")
+                max_depth += 1
+            elif bus_id_encounters_tracker[bus_id]["encounter_period"] is None:
+                bus_id_encounters_tracker[bus_id]["encounter_period"] = timestamp - bus_id_encounters_tracker[bus_id][
+                    "first_encounter_ts"]
+                print(
+                    f"got encounter period for bus id {bus_id} of {bus_id_encounters_tracker[bus_id]['encounter_period']}")
+                if bus_id_encounters_tracker[bus_id]["encounter_period"] > increment:
+                    print(f"increased increment from {increment} to {bus_id_encounters_tracker[bus_id]['encounter_period']}")
+                    increment = bus_id_encounters_tracker[bus_id]["encounter_period"]
+
         else:
             return timestamp
-        if timestamp % 10_000:
-            print(timestamp, i)
+        # prevent infinite loop
         if timestamp > max_ts:
             break
-        timestamp += bus_ids[0]  # a bit cheeky because could be x but it isnt so it is what it is
+
+        timestamp += increment
+
 
 def a(input_text: str):
     earliest_depart_timestamp, bus_ids = parse_bus_times(input_text)
