@@ -17,6 +17,11 @@ abstractions I created, which I will try to avoid in future AOCs but when it did
 Day 13 part b took a while as my tests didn't capture a key edge case which caused a bit of trying to optimize an 
 infinite loop... Will try to assume my tests are ineffective rather than that my code is inefficient in future.  
 
+For day 17 my solution was suboptimal with part b taking about `1m30s` to run however I felt this to be not too
+unreasonably long (I wouldn't be happy with anything over 5 mins) and did note some ideas to optimize it.
+
+ 
+
 ### Running it
 
 Paths are configured assuming we run from the root directory e.g.
