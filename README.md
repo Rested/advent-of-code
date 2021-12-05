@@ -1,6 +1,9 @@
 # advent-of-code
 Advent of code challenges
 
+## [2021](./advent_2021)
+python 3.10 dropped pretty recently, so aiming to use structural pattern matching in every problem to get a decent sense of when and when not to use it.
+
 ## [2020](./advent_2020)
 
 ### General approach
